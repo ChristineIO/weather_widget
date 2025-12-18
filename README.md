@@ -1,4 +1,4 @@
-# weather_widget
+# Weather Widget
 
 A new Flutter project.
 
