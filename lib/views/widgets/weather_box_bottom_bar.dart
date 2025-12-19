@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_widget/views/widgets/weather_box_bottom_bar_item.dart';
 
 class WeatherBoxBottomBar extends StatelessWidget {
@@ -9,6 +8,7 @@ class WeatherBoxBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        alignment: Alignment.bottomCenter,
         margin: const EdgeInsets.only(top: 25),
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
 
@@ -18,7 +18,7 @@ class WeatherBoxBottomBar extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
           spacing: 25,
           children: const [
             WeatherBoxBottomBarItem(

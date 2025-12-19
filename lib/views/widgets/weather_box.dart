@@ -14,12 +14,13 @@ class WeatherBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
+    final scale = currentWidth / 390;
     return Column(
       children: [
         Container(
           alignment: Alignment.center,
           width: currentWidth * 0.99,
-          height: currentWidth < 600 ? 400 : 500,
+          height: currentWidth < 600 ? 400 : 1000,
           padding: const EdgeInsets.all(15),
           margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
           decoration: BoxDecoration(
@@ -47,7 +48,10 @@ class WeatherBox extends StatelessWidget {
                 Text(
                   'Middleton Grange',
                   textAlign: TextAlign.start,
-                  style: GoogleFonts.poppins(color: Colors.white, fontSize: 18),
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: (18 * scale).clamp(16, 22),
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Row(
