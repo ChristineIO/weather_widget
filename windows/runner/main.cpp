@@ -25,12 +25,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 
   FlutterWindow window(project);
-  int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-  int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-  int x = (screenWidth - 500) / 2;
-  int y = (screenHeight - 500) / 2;
-  Win32Window::Point origin(x, y);
-  Win32Window::Size size(500, 500);
+  Win32Window::Point origin(100, 100);
+  Win32Window::Size size(400, 400);
   if (!window.Create(L"weather_widget", origin, size)) {
     return EXIT_FAILURE;
   }
