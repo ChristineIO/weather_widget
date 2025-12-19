@@ -18,9 +18,8 @@ class WeatherBox extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.center,
-          // width: currentWidth < 600 ? 350 : currentWidth > 600 ? 670 : 1200,
           width: currentWidth * 0.99,
-          height: 400,
+          height: currentWidth < 600 ? 400 : 500,
           padding: const EdgeInsets.all(15),
           margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
           decoration: BoxDecoration(

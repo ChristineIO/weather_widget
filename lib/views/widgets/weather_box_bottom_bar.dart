@@ -9,43 +9,32 @@ class WeatherBoxBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        width: 400,
         margin: const EdgeInsets.only(top: 25),
-        padding: const EdgeInsets.fromLTRB(15, 20, 5, 20),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: const Color.fromARGB(49, 167, 227, 255),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Row(
-                children: [
-                  WeatherBoxBottomBarItem(
-                    icon: Icons.water_drop,
-                    label: 'Humidity',
-                    value: '78%',
-                  ),
-
-                  const SizedBox(width: 50),
-
-                  WeatherBoxBottomBarItem(
-                    icon: Icons.air,
-                    label: 'Wind',
-                    value: '12 mph',
-                  ),
-
-                  const SizedBox(width: 50),
-
-                  WeatherBoxBottomBarItem(
-                    icon: Icons.remove_red_eye_outlined,
-                    label: 'Visibility',
-                    value: '10 mi',
-                  ),
-                ],
-              ),
+          spacing: 25,
+          children: const [
+            WeatherBoxBottomBarItem(
+              icon: Icons.water_drop,
+              label: 'Humidity',
+              value: '78%',
+            ),
+            WeatherBoxBottomBarItem(
+              icon: Icons.air,
+              label: 'Wind',
+              value: '12 mph',
+            ),
+            WeatherBoxBottomBarItem(
+              icon: Icons.remove_red_eye_outlined,
+              label: 'Visibility',
+              value: '10 mi',
             ),
           ],
         ),

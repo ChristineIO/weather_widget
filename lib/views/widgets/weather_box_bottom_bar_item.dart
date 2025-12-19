@@ -13,7 +13,7 @@ class WeatherBoxBottomBarItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, color: Colors.green.shade300, size: 32),
+        Icon(icon, color: Colors.green.shade100, size: 32),
         const SizedBox(height: 8),
         Text(
           label,
@@ -28,7 +28,6 @@ class WeatherBoxBottomBarItem extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: 4),
       ],
     );
   }
