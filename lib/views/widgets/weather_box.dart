@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_widget/data/weather_info.dart';
@@ -18,10 +19,52 @@ class _WeatherBoxState extends State<WeatherBox> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    fetchWeatherOnLoad();
+  }
+
+  Map<String, dynamic>? weatherInfo;
+  late String cityName;
+  double tempKelvin = 274;
+  double getCelsius = 0;
+  double getFarenheit = 32;
+  int tempCelsius = 0;
+  int tempFarenheit = 32;
+
+  late String weatherDescription; // few clouds
+
+  late double windSpeed; // 4.78
+  late int windDegree; // 179
+  bool celsuis = true;
+  Future<void> fetchWeatherOnLoad() async {
+    try {
+      final Map<String, dynamic> response = await fetchApi();
+
+      setState(() {
+        weatherInfo = response;
+        cityName = weatherInfo?['name']; // Hartlepool
+        tempKelvin = weatherInfo?['main']['temp']; // 278.74
+        getCelsius = tempKelvin - 273.15; // Convert to °C
+        getFarenheit = getCelsius * 9 / 5 + 32;
+        tempCelsius = getCelsius.ceil();
+        tempFarenheit = getFarenheit.ceil();
+
+        weatherDescription =
+            weatherInfo?['weather'][0]['description']; // few clouds
+
+        windSpeed = weatherInfo?['wind']['speed']; // 4.78
+        windDegree = weatherInfo?['wind']['deg']; // 179
+      });
+    } catch (e) {
+      throw Exception("Error catching response $e");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    Map<String, dynamic>? weatherInfo;
     return Column(
       children: [
         Container(
@@ -95,22 +138,23 @@ class _WeatherBoxState extends State<WeatherBox> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
-                  width: screenWidth * 0.125,
+                  width: screenWidth * 0.25,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.purple.shade900),
                     borderRadius: BorderRadius.circular(50),
                     color: const Color.fromARGB(130, 255, 183, 218),
                   ),
-                  padding: const EdgeInsets.all(1.5),
+                  padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.fromLTRB(50, 0, 15, 25),
+
                   child: Stack(
                     children: [
                       // Outline
                       Text(
-                        '15',
+                        celsuis ? '$tempCelsius°C' : '$tempFarenheit°F',
                         style: GoogleFonts.unkempt(
-                          fontSize: 32,
+                          fontSize: 27,
                           fontWeight: FontWeight.w700,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
@@ -121,9 +165,9 @@ class _WeatherBoxState extends State<WeatherBox> {
 
                       // Fill
                       Text(
-                        '15',
+                        celsuis ? '$tempCelsius°C' : '$tempFarenheit°F',
                         style: GoogleFonts.unkempt(
-                          fontSize: 32,
+                          fontSize: 27,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
                         ),
@@ -148,22 +192,16 @@ class _WeatherBoxState extends State<WeatherBox> {
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: InkWell(
-                  onTap: () async {
-                    final data = await fetchApi();
-
-                    weatherInfo=data;
-                    print(weatherInfo);
-                  },
-                  child: Text(
-                    "It's sunny today",
-                    style: GoogleFonts.delius(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: const Color.fromARGB(255, 28, 3, 78),
-                    ),
-                  ),
-                ),
+                child: weatherInfo == null
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        "Hmmm... $weatherDescription today",
+                        style: GoogleFonts.delius(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: const Color.fromARGB(255, 28, 3, 78),
+                        ),
+                      ),
               ),
             ],
           ),
