@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_widget/data/weather_info.dart';
 import 'package:weather_widget/views/widgets/degree_buttons.dart';
 
-class WeatherBox extends StatelessWidget {
+class WeatherBox extends StatefulWidget {
   const WeatherBox({super.key});
 
+  @override
+  State<WeatherBox> createState() => _WeatherBoxState();
+}
+
+class _WeatherBoxState extends State<WeatherBox> {
   String getCurrentTime() {
     final now = DateTime.now();
     return DateFormat('h:mm a').format(now);
@@ -15,6 +21,7 @@ class WeatherBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    Map<String, dynamic>? weatherInfo;
     return Column(
       children: [
         Container(
@@ -141,12 +148,20 @@ class WeatherBox extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
-                  "It's sunny today",
-                  style: GoogleFonts.delius(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 28, 3, 78),
+                child: InkWell(
+                  onTap: () async {
+                    final data = await fetchApi();
+
+                    weatherInfo=data;
+                    print(weatherInfo);
+                  },
+                  child: Text(
+                    "It's sunny today",
+                    style: GoogleFonts.delius(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: const Color.fromARGB(255, 28, 3, 78),
+                    ),
                   ),
                 ),
               ),
