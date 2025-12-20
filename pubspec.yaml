@@ -63,7 +63,7 @@ flutter:
   assets:
     - assets/images/weather_background_light.png
     - assets/images/weather_background_lightmode.png
-    - assets/images/kitty_mascot.png
+    - assets/images/cat_mascot.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
