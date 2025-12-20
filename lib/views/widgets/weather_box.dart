@@ -29,20 +29,35 @@ class WeatherBox extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                'Weather ',
-                style: GoogleFonts.jersey15(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      offset: const Offset(2, 2),
-                      blurRadius: 3,
-                      color: Colors.black.withAlpha(150),
+              Stack(
+                children: [
+                  Text(
+                    'Weather ',
+                    style: GoogleFonts.jersey15(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 2.5
+                        ..color = Colors.indigo.shade500,
                     ),
-                  ],
-                ),
+                  ),
+                  Text(
+                    'Weather ',
+                    style: GoogleFonts.jersey15(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(2, 2),
+                          blurRadius: 3,
+                          color: Colors.black.withAlpha(150),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
 
               Row(
