@@ -70,7 +70,46 @@ class WeatherBox extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  width: screenWidth * 0.125,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.purple.shade900),
+                    borderRadius: BorderRadius.circular(50),
+                    color: const Color.fromARGB(130, 255, 183, 218),
+                  ),
+                  padding: const EdgeInsets.all(1.5),
+                  margin: const EdgeInsets.fromLTRB(50, 0, 15, 25),
+                  child: Stack(
+                    children: [
+                      // Outline
+                      Text(
+                        '15',
+                        style: GoogleFonts.unkempt(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 2.5
+                            ..color = Colors.purple.shade800,
+                        ),
+                      ),
 
+                      // Fill
+                      Text(
+                        '15',
+                        style: GoogleFonts.unkempt(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Container(
                 width: screenWidth * 0.35,
                 margin: EdgeInsets.only(left: 15),
@@ -92,7 +131,7 @@ class WeatherBox extends StatelessWidget {
                   style: GoogleFonts.delius(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 28, 3, 78)
+                    color: const Color.fromARGB(255, 28, 3, 78),
                   ),
                 ),
               ),
