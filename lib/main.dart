@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_widget/views/widget_tree.dart';
-import 'package:device_preview/device_preview.dart';
 
 void main() {
   runApp(
