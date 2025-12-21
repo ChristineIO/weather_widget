@@ -24,18 +24,18 @@ class _WeatherBoxState extends State<WeatherBox> {
   }
 
   Map<String, dynamic>? weatherInfo;
-  late String cityName;
+  String cityName = "";
   double tempKelvin = 274;
   double getCelsius = 0;
   double getFarenheit = 32;
   int tempCelsius = 0;
   int tempFarenheit = 32;
 
-  late String weatherDescription; // few clouds
+  String weatherDescription = "";
 
-  late double windSpeed; // 4.78
-  late int windDegree; // 179
-  bool celsius = true; // Changed from static to instance variable
+  double windSpeed = 4.78;
+  int windDegree = 179;
+  bool celsius = true;
   Future<void> fetchWeatherOnLoad() async {
     try {
       final Map<String, dynamic> response = await fetchApi();
@@ -115,7 +115,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                                   foreground: Paint()
                                     ..style = PaintingStyle.stroke
                                     ..strokeWidth = 2.5
-                                    ..color = Color.fromARGB(255, 11, 3, 72)
+                                    ..color = Colors.indigo.shade900,
                                 ),
                               ),
 
@@ -148,13 +148,13 @@ class _WeatherBoxState extends State<WeatherBox> {
                     vertical: 5,
                   ),
                   width: screenWidth * 0.5,
-                      child: Text(
-                        cityName,
-                        style: GoogleFonts.tiny5(
-                          fontSize: 33,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.indigo.shade50,
-                        ),
+                  child: Text(
+                    cityName == '' ? 'Loading...' : cityName,
+                    style: GoogleFonts.tiny5(
+                      fontSize: 33,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.pink.shade50,
+                    ),
                   ),
                 ),
               ),
@@ -168,10 +168,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                 margin: EdgeInsets.only(bottom: 50),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
-                  border: Border.all(
-                    color: Colors.indigo.shade300,
-                    width: 2,
-                  ),
+                  border: Border.all(color: Colors.indigo.shade300, width: 2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: weatherInfo == null
@@ -183,7 +180,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                             style: GoogleFonts.delius(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
-                              color: const Color.fromARGB(255, 12, 3, 78),
+                              color: Colors.indigo.shade900,
                             ),
                           ),
                           const SizedBox(width: 6),
@@ -197,7 +194,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                             style: GoogleFonts.delius(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
-                              color: const Color.fromARGB(255, 12, 3, 78),
+                              color: Colors.indigo.shade900,
                             ),
                           ),
                         ],
@@ -207,7 +204,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                         style: GoogleFonts.delius(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
-                          color: const Color.fromARGB(255, 12, 3, 78),
+                          color: Colors.indigo.shade900,
                         ),
                       ),
               ),
