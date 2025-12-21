@@ -18,6 +18,7 @@ class DegreeButtons extends StatelessWidget {
           child: Text(
             degree,
             style: GoogleFonts.jersey15(fontSize: 16, color: Colors.white),
+            
           ),
         ),
       ],
