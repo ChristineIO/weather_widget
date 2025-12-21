@@ -68,7 +68,7 @@ class _WeatherBoxState extends State<WeatherBox> {
       children: [
         Container(
           width: screenWidth,
-          height: screenHeight * 0.739,
+          height: screenHeight * 0.8595,
           alignment: Alignment.bottomCenter,
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -86,11 +86,8 @@ class _WeatherBoxState extends State<WeatherBox> {
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    // border: Border.all(color: Colors.purple.shade900),
-                    // borderRadius: BorderRadius.circular(50),
-                    // color: const Color.fromARGB(130, 255, 183, 218),
                     image: DecorationImage(
-                      image: AssetImage("assets/images/bubble.png"),
+                      image: AssetImage("assets/images/bubble_indigo.png"),
                     ),
                   ),
                   padding: const EdgeInsets.symmetric(
@@ -118,7 +115,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                                   foreground: Paint()
                                     ..style = PaintingStyle.stroke
                                     ..strokeWidth = 2.5
-                                    ..color = Colors.purple.shade800,
+                                    ..color = Color.fromARGB(255, 11, 3, 72)
                                 ),
                               ),
 
@@ -130,7 +127,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                                 style: GoogleFonts.unkempt(
                                   fontSize: screenWidth * 0.055,
                                   fontWeight: FontWeight.w700,
-                                  color: Colors.white,
+                                  color: Colors.grey.shade100,
                                 ),
                               ),
                             ],
@@ -138,6 +135,26 @@ class _WeatherBoxState extends State<WeatherBox> {
                         },
                       ),
                     ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 5,
+                  ),
+                  width: screenWidth * 0.5,
+                      child: Text(
+                        cityName,
+                        style: GoogleFonts.tiny5(
+                          fontSize: 33,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.indigo.shade50,
+                        ),
                   ),
                 ),
               ),
@@ -152,48 +169,47 @@ class _WeatherBoxState extends State<WeatherBox> {
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   border: Border.all(
-                    color: Colors.deepPurpleAccent.shade100,
-                    width: 1.5,
+                    color: Colors.indigo.shade300,
+                    width: 2,
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: weatherInfo == null
-    ? Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "Hmmm... ",
-            style: GoogleFonts.delius(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: const Color.fromARGB(255, 28, 3, 78),
-            ),
-          ),
-          const SizedBox(width: 6),
-          const SizedBox(
-            width: 14,
-            height: 14,
-            child: CircularProgressIndicator(strokeWidth: 2),
-          ),
-          Text(
-            " today",
-            style: GoogleFonts.delius(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: const Color.fromARGB(255, 28, 3, 78),
-            ),
-          ),
-        ],
-      )
-    : Text(
-        "Hmmm... $weatherDescription today",
-        style: GoogleFonts.delius(
-          fontSize: 15,
-          fontWeight: FontWeight.w700,
-          color: const Color.fromARGB(255, 28, 3, 78),
-        ),
-      ),
-
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Hmmm... ",
+                            style: GoogleFonts.delius(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                              color: const Color.fromARGB(255, 12, 3, 78),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          const SizedBox(
+                            width: 14,
+                            height: 14,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                          Text(
+                            " today",
+                            style: GoogleFonts.delius(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                              color: const Color.fromARGB(255, 12, 3, 78),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Text(
+                        "Hmmm... $weatherDescription today",
+                        style: GoogleFonts.delius(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: const Color.fromARGB(255, 12, 3, 78),
+                        ),
+                      ),
               ),
             ],
           ),
