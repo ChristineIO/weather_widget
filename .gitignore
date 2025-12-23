@@ -45,3 +45,5 @@ app.*.map.json
 /android/app/release
 
 lib/api/api_key.dart
+
+*/ic_launcher.png
