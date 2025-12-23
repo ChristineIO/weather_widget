@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
+import 'package:weather_widget/api/api_key.dart';
 
 Future<Map<String, dynamic>> fetchApi() async {
   double lat;
@@ -29,7 +30,7 @@ Future<Map<String, dynamic>> fetchApi() async {
     print('Location: $lat, $lon, Permission: $permission');
   }
   final url = Uri.parse(
-    "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=5a63b569eddaaa872542222d90fe59bd",
+    "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$secretUrl",
   );
   final response = await http.get(url);
   if (response.statusCode == 200) {
