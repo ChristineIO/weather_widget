@@ -46,4 +46,4 @@ app.*.map.json
 
 lib/api/api_key.dart
 
-*/ic_launcher.png
+**/ic_launcher.png
