@@ -27,7 +27,6 @@ Future<Map<String, dynamic>> fetchApi() async {
 
     lat = position.latitude;
     lon = position.longitude;
-    print('Location: $lat, $lon, Permission: $permission');
   }
   final url = Uri.parse(
     "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$secretUrl",
@@ -35,7 +34,6 @@ Future<Map<String, dynamic>> fetchApi() async {
   final response = await http.get(url);
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body);
-    print(data);
     return data;
   } else {
     throw Exception('Failed to fetch weather data: ${response.statusCode}');
