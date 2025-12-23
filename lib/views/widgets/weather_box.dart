@@ -36,6 +36,11 @@ class _WeatherBoxState extends State<WeatherBox> {
   double windSpeed = 4.78;
   int windDegree = 179;
   bool celsius = true;
+
+  int sunrise = 7;
+  int sunset = 9;
+  bool isSunset = false;
+
   Future<void> fetchWeatherOnLoad() async {
     try {
       final Map<String, dynamic> response = await fetchApi();
@@ -53,6 +58,8 @@ class _WeatherBoxState extends State<WeatherBox> {
 
         windSpeed = weatherInfo?['wind']['speed']; // 4.78
         windDegree = weatherInfo?['wind']['deg']; // 179
+        sunrise = weatherInfo?['sys']['sunrise'];
+        sunset = weatherInfo?['sys']['sunset'];
       });
     } catch (e) {
       throw Exception("Error catching response $e");
@@ -63,6 +70,14 @@ class _WeatherBoxState extends State<WeatherBox> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    double currentTimeFloat = DateTime.now().millisecondsSinceEpoch / 1000;
+    int currentTime = currentTimeFloat.ceil();
+    // Check if current time is between sunrise and sunset
+    if (currentTime <= sunset) {
+      isSunset=false;
+    } else if (currentTime >= sunset) {
+      isSunset=true;
+    }
 
     return Column(
       children: [
@@ -72,7 +87,9 @@ class _WeatherBoxState extends State<WeatherBox> {
           alignment: Alignment.bottomCenter,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(
+              image: isSunset ? AssetImage(
+                'assets/images/weather_background_darkmode.png',
+              ):AssetImage(
                 'assets/images/weather_background_lightmode.png',
               ),
               fit: BoxFit.cover,
@@ -141,19 +158,20 @@ class _WeatherBoxState extends State<WeatherBox> {
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                  alignment: Alignment.center,
+                  alignment: Alignment.topCenter,
                   decoration: BoxDecoration(),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 7,
-                    vertical: 5,
+                    vertical: 0,
                   ),
+                  margin: EdgeInsets.only(bottom: 50),
                   width: screenWidth * 0.5,
                   child: Text(
                     cityName == '' ? 'Loading...' : cityName,
                     style: GoogleFonts.tiny5(
-                      fontSize: 33,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.pink.shade50,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.indigo.shade800,
                     ),
                   ),
                 ),
@@ -187,7 +205,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                           const SizedBox(
                             width: 14,
                             height: 14,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                            child: CircularProgressIndicator.adaptive(strokeWidth: 2,),
                           ),
                           Text(
                             " today",
@@ -200,7 +218,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                         ],
                       )
                     : Text(
-                        "Hmmm... $weatherDescription today",
+                        'Hmmm... $weatherDescription today',
                         style: GoogleFonts.delius(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,

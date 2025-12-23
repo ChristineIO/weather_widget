@@ -10,7 +10,7 @@ class DegreeButtons extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.deepPurple.shade400),
+            border: Border.all(color: Colors.indigo.shade500),
             borderRadius: BorderRadius.circular(25),
             color: const Color.fromARGB(130, 255, 251, 251),
           ),
@@ -18,7 +18,6 @@ class DegreeButtons extends StatelessWidget {
           child: Text(
             degree,
             style: GoogleFonts.jersey15(fontSize: 16, color: Colors.white),
-            
           ),
         ),
       ],

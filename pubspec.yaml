@@ -63,7 +63,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/weather_background_light.png
+    - assets/images/weather_background_darkmode.png
     - assets/images/weather_background_lightmode.png
     - assets/images/cat_mascot.png
     - assets/images/bubble.png
