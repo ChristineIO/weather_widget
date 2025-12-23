@@ -10,7 +10,7 @@ Future<Map<String, dynamic>> fetchApi() async {
 
   bool mockLocation = kDebugMode;
 
-  if (!mockLocation) {
+  if (mockLocation) {
     lat = 53.2232;
     lon = -4.200;
   } else {
