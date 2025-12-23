@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_widget/data/temp_state.dart';
 import 'package:weather_widget/data/weather_info.dart';
+import 'package:weather_widget/services/weather_service.dart';
 
 class WeatherBox extends StatefulWidget {
   const WeatherBox({super.key});
@@ -17,10 +20,22 @@ class _WeatherBoxState extends State<WeatherBox> {
     return DateFormat('h:mm a').format(now);
   }
 
+  late final weatherService;
+  // ignore: unused_field
+  late Timer _weatherTimer;
+
   @override
   void initState() {
     super.initState();
+    
+    weatherService = WeatherService();
+    
     fetchWeatherOnLoad();
+
+    _weatherTimer = Timer.periodic(const Duration(minutes: 5), (timer){
+      fetchWeatherOnLoad();
+    });
+
   }
 
   Map<String, dynamic>? weatherInfo;
